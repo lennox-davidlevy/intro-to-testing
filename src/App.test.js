@@ -29,8 +29,6 @@ test('after typing "hello" in textbox, will print "HELLO" after clicking button'
   userEvent.type(textField, 'hello');
   userEvent.click(screen.getByRole('button'));
   expect(screen.getByText(/HELLO/)).toBeVisible();
-  userEvent.click(screen.getByRole('button'));
-  expect(textField).not.toHaveValue('hello');
 });
 
 test('after clicking clear, textbox is empty', () => {
