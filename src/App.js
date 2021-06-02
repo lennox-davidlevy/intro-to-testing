@@ -1,23 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
 
 function App() {
+  const [inputText, setInputText] = useState('');
+  const [renderText, setRenderText] = useState('');
+  const [clear, setClear] = useState(false);
+  const handleClick = (e) => {
+    e.preventDefault();
+    if (clear) {
+      setInputText('');
+      setRenderText('');
+      setClear(false);
+      return;
+    }
+    setClear(true);
+    setRenderText(inputText.toUpperCase());
+  };
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <label htmlFor="text_field">
+        Enter Text
+        <input
+          type="text"
+          id="text_field"
+          value={inputText}
+          onChange={(e) => setInputText(e.target.value)}
+        />
+      </label>
+      <button onClick={handleClick}>{!clear ? 'Submit' : 'Clear'}</button>
+      <div>{renderText}</div>
     </div>
   );
 }
